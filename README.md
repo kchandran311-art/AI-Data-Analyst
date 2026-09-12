@@ -32,4 +32,8 @@ ai-data-analyst/
     └── index.html      # UI
 ```
 # Page Preview
-<img src="Preview_of_fileuploading" width=800>
+<img src="Preview_of_fileuploading.png" alt="AI Data Analyst" width=800>
+
+<img src="Preview_of_finalresult.png" alt="AI Data Analyst" width=800>
+
+<img src="Preview_of_first5rows.png" alt="AI Data Analyst" width=800>
