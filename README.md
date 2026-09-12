@@ -31,3 +31,5 @@ ai-data-analyst/
 └── templates/
     └── index.html      # UI
 ```
+# Page Preview
+<img src="Preview_of_fileuploading" width=800>
