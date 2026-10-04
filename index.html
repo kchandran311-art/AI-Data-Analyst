@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Data Analyst</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    .data-table { min-width: 100%; font-size: 0.875rem; text-align: left; white-space: nowrap; border-collapse: collapse; }
+    .data-table th { background: #eff6ff; color: #1d4ed8; padding: 0.5rem 0.75rem; position: sticky; top: 0; }
+    .data-table td { padding: 0.5rem 0.75rem; border-top: 1px solid #e5e7eb; }
+    .data-table tr:hover td { background: #f9fafb; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-blue-50 min-h-screen p-6">
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header -->
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h1 class="text-3xl font-bold text-blue-700">📈📊 AI Data Analyst</h1>
+      <p class="text-gray-600">Ask smart questions about your uploaded datasets with ease.</p>
+    </div>
+
+    <!-- Alerts -->
+    {% if error %}
+      <div class="bg-red-100 border-l-4 border-red-500 text-red-800 p-4 rounded" role="alert">
+        <strong class="font-bold">Error:</strong> {{ error }}
+      </div>
+    {% endif %}
+    {% if info %}
+      <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-800 p-4 rounded" role="status">
+        {{ info }}
+      </div>
+    {% endif %}
+
+    <!-- Upload & Query Form -->
+    <form method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow space-y-5"
+          onsubmit="const b=this.querySelector('button'); b.disabled=true; b.innerText='⏳ Analyzing...';">
+      <div class="space-y-2">
+        <label class="block font-semibold text-gray-700">📁 Upload Dataset (CSV or Excel) — only needed the first time</label>
+        <input type="file" name="file" accept=".csv,.xlsx" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+
+      <div class="space-y-2">
+        <label class="block font-semibold text-gray-700">❓ Ask Your Question</label>
+        <textarea name="query" rows="3" required placeholder="e.g. What is the average price by category?" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">{{ query }}</textarea>
+      </div>
+
+      <button type="submit" class="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 disabled:opacity-60 transition duration-200 font-semibold">
+        ⚡ Analyze Data
+      </button>
+    </form>
+
+    <!-- Data Preview -->
+    {% if preview_html %}
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-semibold text-blue-700 mb-4">👁 Preview: First 5 Rows</h2>
+        <div class="overflow-x-auto border border-gray-200 rounded">
+          {{ preview_html | safe }}
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Generated Code -->
+    {% if code_generated %}
+      <div class="bg-gray-900 text-green-300 p-6 rounded-xl shadow">
+        <h2 class="text-xl font-semibold text-green-300 mb-4">🐍 Generated Pandas Code</h2>
+        <pre class="overflow-auto"><code>{{ code_generated }}</code></pre>
+      </div>
+    {% endif %}
+
+    <!-- Result -->
+    {% if result_html %}
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-semibold text-blue-700 mb-4">✅ Analysis Result</h2>
+        <div class="overflow-x-auto border border-gray-200 rounded">
+          {{ result_html | safe }}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</body>
+</html>
